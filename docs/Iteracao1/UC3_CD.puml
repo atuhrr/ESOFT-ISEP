@@ -1,0 +1,54 @@
+@startuml
+
+
+class  DefinirCategoriaUI{
+
+}
+
+class DefinirCategoriaController{
+getAreasAtividade()
+novaCategoriaTarefa(String desc,String IDArea)
+getListaCompetenciaTecnica()
+novaCompetencia(String idComp, boolean obrgComp)
+registaCategoria()
+
+}
+
+class Plataforma {
+lA=getListaAreaAtividade()
+area=getAreaAtividadeByID(String IDArea)
+novaCategoriaTarefa(String desc, AreaAtividade area)
+lc=getListaCompetenciaTecnica()
+comp=getCompetenciabyID(String idComp)
+novaCompetenciaTecnica(CompetenciaTecnica comp,boolean obrgComp)
+registaCategoria(CategoriaTarefa categoria)
+validaCategoria(CategoriaTarefa categoria)
+addCategoria(CategoriaTarefa categoria)
+}
+
+class ObrigatoriedadeCT {
+CompetenciaTecnica comp
+boolean obrgComp
+ObrigatoriedadeCT(CompetenciaTecnica comp,boolean obrgComp)
+}
+
+
+class CategoriaTarefa{
+ String desc
+ AreaAtividade area
+ boolean obrgComp
+ObrigatoriedadeCT obrgCT
+CategoriaTarefa(String desc,AreaAtividade area)
+addObrigatoriedadeCT(ObrigatoriedadeCT obrgCT)
+
+
+}
+
+
+DefinirCategoriaUI .down.>  DefinirCategoriaController
+DefinirCategoriaController .down.> CategoriaTarefa
+DefinirCategoriaController   .down.> Plataforma
+Plataforma "1" ---> "*"  CategoriaTarefa :  possui 
+CategoriaTarefa "1" -- "*"  ObrigatoriedadeCT : tem >
+
+@enduml

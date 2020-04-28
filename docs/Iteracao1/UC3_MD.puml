@@ -1,0 +1,56 @@
+@startuml
+hide methods
+left to right direction
+ 
+ 
+class Plataforma {
+  -String designacao
+}
+
+class AreaAtividade {
+  -String codigo
+  -String descBreve
+  -String descDetalhada
+}
+
+class CompetenciaTecnica {
+  -String codigo
+  -String descBreve
+  -String descDetalhada
+}
+
+
+
+class Administrativo {
+  -String nome
+  -String telefone
+  -String email
+}
+class CategoriadeTarefa {
+-String codigo
+  -String descBreve
+  -String descDetalhada
+}
+
+class ObrigatoriedadeCT {
+-boolean obrgCT
+-CompetenciaTecnica comp
+}
+
+Administrativo "1" -- "1" Plataforma : trabalha para >
+Administrativo "1" -- "*" CategoriadeTarefa : define  >
+Administrativo "1" -- "*" CompetenciaTecnica : define  >
+Administrativo "1" -- "*" AreaAtividade : define  >
+AreaAtividade "1" -- "*" ObrigatoriedadeCT : tem >
+Plataforma "1" -- "*" CategoriadeTarefa : possui >
+Plataforma "1" -- "*" AreaAtividade : possui >
+Plataforma "1" -- "*" CompetenciaTecnica : possui >
+Plataforma "1" -- "*" Administrativo : tem  >
+CompetenciaTecnica "*" -- "*" AreaAtividade : referente a >
+CompetenciaTecnica "*" -- "*" ObrigatoriedadeCT : tem >
+CategoriadeTarefa "1" -- "*" AreaAtividade : referente >
+CategoriadeTarefa "1" -- "*" CompetenciaTecnica : referente >
+CategoriadeTarefa "1" -- "*" ObrigatoriedadeCT : tem 
+
+
+@enduml

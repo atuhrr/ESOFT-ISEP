@@ -1,0 +1,37 @@
+@startuml
+
+autonumber
+actor "Administrativo" as CO
+
+activate CO
+
+CO -> ":Sistema" : nova categoria de tarefa
+activate ":Sistema"
+
+":Sistema" --> CO : solicita dados \n(descrição , área de atividade)
+deactivate ":Sistema"
+
+CO -> ":Sistema" : introduz os dados solicitados
+activate ":Sistema"
+
+":Sistema" --> CO : apresenta as listas de competências disponíveis e solicita as competências obrigatórias e opcionais .
+deactivate ":Sistema"
+
+
+loop 
+CO -> ":Sistema" : seleciona as competências opcionais e as obrigatórias
+activate ":Sistema"
+end
+
+":Sistema" --> CO : valida os dados e solicita confirmação
+deactivate ":Sistema"
+
+CO -> ":Sistema" : confirma os dados
+activate ":Sistema"
+
+":Sistema" --> CO : informa o sucesso da operação
+deactivate ":Sistema"
+
+
+
+@enduml

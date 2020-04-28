@@ -1,0 +1,24 @@
+@startuml
+autonumber
+actor "Administrativo" as ADM
+
+participant ":Sistema" as SIST
+
+activate ADM
+ADM -> SIST : inicia o processo de registo  de um Freelancer
+activate SIST
+SIST --> ADM : solicita dados \n((Nome, NIF, Endereço Postal, Contacto telefónico, email , Habilitação académica , Reconhecimento de uma competência técnica).
+
+ADM -> SIST : introduz os dados solicitados
+activate SIST
+SIST --> ADM : apresenta dados e solicita confirmação
+deactivate SIST
+
+ADM -> SIST : confirma
+activate SIST
+SIST --> ADM : informa operação bem sucedida
+deactivate SIST
+
+deactivate ADM
+
+@enduml

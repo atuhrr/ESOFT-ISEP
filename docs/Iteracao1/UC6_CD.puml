@@ -1,0 +1,43 @@
+@startuml
+
+class Colaborador {
+  -String nome
+  -String funcao
+  -String telefone
+  -String email
+  Colaborador(nome,função,tlf, email)
+  String getNome()
+  String getEmail()
+}
+class Utilizador {
+  -String nome
+  -String email
+  -String password
+}
+class EspecificarTarefaController {
+  -String referencia
+  -String designacaÁao
+  -String descricaoInformal
+  -String descricaoTecnica
+  -String duracao
+  -double custo
+  -String categoria
+  
+  novaTarefa(referencia, designacaçao,descricaoInformal,
+descricaoTecnica, duracao, custo, categoria)
+}
+
+
+
+Utilizador ...> EspecificarTarefaController
+
+
+Colaborador ..> EspecificarTarefaController
+ 
+
+
+
+
+
+
+@enduml

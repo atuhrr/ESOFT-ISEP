@@ -1,0 +1,56 @@
+@startuml
+@startuml
+autonumber
+actor "Administrativo" as ADM
+
+participant ":DefinirEspecificarTarefaUI" as UI
+participant ":DefinirEspecificarTarefaController" as CTRL
+participant ":Plataforma" as PLAT
+participant "tarefa:EspecificarTarefa" as TAREFA
+participant ":Autorizacao\nFacade" as AUT
+
+
+activate ADM
+ADM -> UI : inicia a especificação de uma nova tarefa 
+activate UI
+UI --> ADM : solicita dados \n(referencia, designacaçao,descricaoInformal, descricaoTecnica,\n duracao, custo, categoria)
+deactivate UI
+
+ADM -> UI : introduz os dados solicitados
+activate UI
+UI -> CTRL : novaTarefa(referencia, designacaçao,descricaoInformal,\n descricaoTecnica, duracao, custo, categoria)
+activate CTRL
+CTRL -> PLAT: tarefa=novaTarefa(referencia, designacaçao,descricaoInformal,\n descricaoTecnica, duracao, custo, categoria)
+activate PLAT
+PLAT --> area:AreaAtividade ** : create(referencia, designacaçao,descricaoInformal,\n descricaoTecnica, duracao, custo, categoria)
+deactivate PLAT
+
+CTRL -> PLAT: validaTarefa(tarefa)
+activate PLAT
+deactivate PLAT
+
+deactivate CTRL
+UI --> ADM : apresenta dados e solicita confirmação
+deactivate UI
+
+ADM -> UI : confirma
+activate UI
+
+UI -> CTRL: registaTarefa()
+activate CTRL
+CTRL ->PLAT: registaTarefa(tarefa)
+activate PLAT
+PLAT -> PLAT: validaTarefa(tarefa)
+PLAT -> AUT: registaTarefa
+PLAT -> PLAT: addTarefa(tarefa)
+
+deactivate PLAT
+deactivate CTRL
+
+UI --> ADM : operação bem sucedida
+deactivate UI
+
+deactivate ADM
+
+@enduml
+@enduml

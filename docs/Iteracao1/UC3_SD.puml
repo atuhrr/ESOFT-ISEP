@@ -1,0 +1,157 @@
+@startuml
+hide methods
+
+autonumber
+
+actor "Administrativo" as CO
+
+participant  ":DefinirCategoriaUI" as DCUI
+participant ":DefinirCategoriaController" as Controller
+
+participant  ":Plataforma" as Plataforma
+participant   "obrgCT:ObrigatoriedadeCT" as obrg
+ 
+
+
+
+
+
+activate CO
+activate DCUI
+CO -> DCUI :  Nova categoria (de tarefas)
+
+DCUI ---> CO : Solicita dados (Descrição, areaAtividade)
+DCUI -> Controller : getAreasAtividade()
+deactivate DCUI
+activate Controller
+Controller -> Plataforma : lA=getAreasAreaAtividade()
+activate Plataforma
+deactivate Plataforma
+deactivate Controller
+DCUI ---> CO : Mostra lista de áreas de atividade
+
+activate DCUI
+CO -> DCUI : Introduz os dados (Descrição,área de atividade)
+
+
+
+DCUI -> Controller : novaCategoriaTarefa(desc,IDArea)
+
+
+deactivate DCUI
+
+activate Controller
+
+activate Plataforma
+Controller -> Plataforma : area=getAreaAtividadeById(IDArea)
+Controller -> Plataforma : novaCategoriaTarefa(desc,area)
+
+
+
+
+
+participant "catg:CategoriaTarefa" as Categoria
+create Categoria 
+Plataforma ---> Categoria : create (desc,area)
+deactivate Plataforma
+participant "la : List<AreaDeAtividade>" as x
+participant "lc : List<CategoriaDeTarefa>" as d
+participant "area : AreaDeAtividade" as a
+
+
+
+deactivate Controller 
+
+
+activate DCUI
+
+DCUI -> Controller :  getListaCompetenciaTecnica()
+
+
+activate Controller
+activate Plataforma
+Controller -> Plataforma : lc =  getListaCompetenciaTecnica()
+deactivate Plataforma
+deactivate Controller
+deactivate DCUI
+DCUI ---> CO : Mostra a lista de competencias Tecnicas 
+
+
+
+
+
+
+
+loop
+
+
+activate DCUI
+
+
+
+CO -> DCUI : Seleciona Competencia e a sua Obrigatoriedade(idComp,obrgComp)
+
+activate Controller
+DCUI -> Controller : novaObrigatoriedadeCT(idComp,obrgComp)
+
+deactivate DCUI
+
+activate Plataforma
+Controller -> Plataforma :  comp=getCompetenciabyID(idComp)
+
+
+
+activate Categoria
+
+
+
+
+
+
+Controller -> Plataforma : novaObrigatoriedadeCT(comp,obrgComp)
+
+deactivate Controller 
+deactivate Plataforma
+create obrg
+Plataforma ---> obrg : create(comp,obrgComp)
+
+
+
+ 
+ obrg -> Categoria : addObrigatoriedadeCT(obrgCT)
+
+
+
+deactivate Categoria
+
+
+end
+
+DCUI ---> CO : Apresenta dados e solicita confirmação  
+activate DCUI
+
+
+
+CO -> DCUI : Confirma os dados  
+
+
+
+DCUI -> Controller : registaCategoria()
+deactivate DCUI
+activate Controller
+
+
+
+
+
+Controller -> Plataforma : registaCategoria(categoria)
+
+activate Plataforma
+deactivate Controller
+Plataforma -> Plataforma :validaCategoria(categoria)
+Plataforma -> Plataforma :addCategoria(categoria)
+deactivate Plataforma
+activate DCUI
+DCUI ---> CO : Informa que a operação foi bem sucedida
+deactivate DCUI 
+@enduml
