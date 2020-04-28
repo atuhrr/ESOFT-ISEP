@@ -7,10 +7,10 @@ O grupo de trabalho é constituído pelo estudantes identificados na tabela segu
 
 | Aluno Nr.	   | Nome do Aluno			    |
 |--------------|------------------------------|
-| **1190549**  | Eduardo Couto                |
-| **1190424**  | Beatriz Seixas               |
-| **1191063**  | Sofia Merino                 |
-| **1190009**  | Arthur Arruda                |
+| ****  | Eduardo Couto                |
+| ****  | Beatriz Seixas               |
+| ****  | Sofia Merino                 |
+| ****  | Arthur Arruda                |
 
 
 
